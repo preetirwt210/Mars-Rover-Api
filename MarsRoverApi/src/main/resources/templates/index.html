@@ -9,12 +9,15 @@
 	<body>
 
 	<div class="container">
-	Welcome To Mars Rover Api Web App<br/><br/>
+	<h2>Welcome To Mars Rover Api Web App</h2><br/><br/>
+	<form method="post" action="" id="frmRoverType">
+	<input type="hidden" id="marsApiRoverData" name="marsApiRoverData" value=""/>
 	<div class="btn-group btn-group-lg" role="group" aria-label="Basic example" style="margin: 2em 0em;">
 	  <button type="button" class="btn btn-primary" id="marsApiCuriosity">Curiosity</button>
 	  <button type="button" class="btn btn-primary" id="marsApiOpportunity">Opportunity</button>
 	  <button type="button" class="btn btn-primary" id="marsApiSpirit">Spirit</button>
 	</div>
+	</form>
 		<div class="container" >
 		  <div  th:each="index : ${#numbers.sequence(0,roverData.photos.size(),4)}" class="row" style="margin-bottom: 2em">
 		    <div class="col-sm" th:if="${index <roverData.photos.size()}">
