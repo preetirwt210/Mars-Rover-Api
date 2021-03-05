@@ -29,5 +29,7 @@ public class HomeController {
 		MarsRoverApiResponse roverData= roverService.getRoverData(marsApiRoverData);
 		model.put("roverData", roverData);
 		return "index";
+		
+			
 	}
 }
