@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.util.StringUtils;
 
+import com.spring.mars.MarsRoverApi.dto.HomeDTO;
 import com.spring.mars.MarsRoverApi.response.MarsRoverApiResponse;
 import com.spring.mars.MarsRoverApi.service.MarsRoverApiService;
+
 
 @Controller
 public class HomeController {
@@ -17,19 +18,17 @@ public class HomeController {
 	private MarsRoverApiService roverService;
 	
 	@GetMapping("/")
-	public String getHomeView(ModelMap model) {
-	
-		MarsRoverApiResponse roverData= roverService.getRoverData("opportunity");
+	public String getHomeView(ModelMap model,HomeDTO homeDto) {
+		if(StringUtils.isEmpty(homeDto.getMarsApiRoverData())) {
+			homeDto.setMarsApiRoverData("Opportunity");
+		}
+		if(homeDto.getMarsSol() ==null)
+			homeDto.setMarsSol(1);
+		MarsRoverApiResponse roverData= roverService.getRoverData(homeDto.getMarsApiRoverData() , homeDto.getMarsSol());
 		model.put("roverData", roverData);
+		model.put("homeDto", homeDto);
 		return "index";
 	}
 	
-	@PostMapping("/")
-	public String postHomeView(ModelMap model, @RequestParam String marsApiRoverData) {
-		MarsRoverApiResponse roverData= roverService.getRoverData(marsApiRoverData);
-		model.put("roverData", roverData);
-		return "index";
-		
-			
-	}
+	
 }

@@ -7,3 +7,24 @@ marsApiButtons.forEach(button => button.addEventListener('click',function(){
 								apiData.value=roverId
 								document.getElementById('formRoverType').submit()
 								}))
+								
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+let marsRoverType = getUrlParameter("marsApiRoverData")
+if(marsRoverType == '')
+  marsRoverType = 'Opportunity'
+  
+highlightBtnByRoverType(marsRoverType)
+  
+  let marsSol = getUrlParameter('marsSol')
+  document.getElementById('marsSol').value= marsSol
+  
+function highlightBtnByRoverType(roverType){
+     document.getElementById('marsApi'+roverType).classList.remove('btn-secondary')
+     document.getElementById('marsApi'+roverType).classList.add('btn-primary')
+  }
