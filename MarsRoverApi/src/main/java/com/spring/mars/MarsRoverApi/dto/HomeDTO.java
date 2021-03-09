@@ -1,9 +1,17 @@
 package com.spring.mars.MarsRoverApi.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="mars_api_preferences")
 public class HomeDTO {
 
+	 private Long userId;
 	private String marsApiRoverData;
 	private Integer marsSol;
 	private Boolean cameraFhaz;
@@ -16,7 +24,15 @@ public class HomeDTO {
 	private Boolean cameraPancam;
 	private Boolean cameraMinites;
 	
-	
+	 private Boolean rememberPreferences;
+	 @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	  
+	 public Long getUserId() {
+		    return userId;
+		  }
+		  public void setUserId(Long userId) {
+		    this.userId = userId;
+		  }
 	public Boolean getCameraFhaz() {
 		return cameraFhaz;
 	}
@@ -71,6 +87,13 @@ public class HomeDTO {
 	public void setCameraMinites(Boolean cameraMinites) {
 		this.cameraMinites = cameraMinites;
 	}
+	public Boolean getRememberPreferences() {
+	    return rememberPreferences;
+	  }
+	  public void setRememberPreferences(Boolean rememberPreferences) {
+	    this.rememberPreferences = rememberPreferences;
+	  }
+	  @Column(length=20)
 	public String getMarsApiRoverData() {
 		return marsApiRoverData;
 	}
@@ -83,6 +106,13 @@ public class HomeDTO {
 	public void setMarsSol(Integer marsSol) {
 		this.marsSol = marsSol;
 	}
-	
+	@Override
+	  public String toString() {
+	    return "HomeDto [userId=" + userId + ", marsApiRoverData=" + marsApiRoverData + ", marsSol=" + marsSol
+	        + ", cameraFhaz=" + cameraFhaz + ", cameraRhaz=" + cameraRhaz + ", cameraMast=" + cameraMast
+	        + ", cameraChemcam=" + cameraChemcam + ", cameraMahli=" + cameraMahli + ", cameraMardi=" + cameraMardi
+	        + ", cameraNavcam=" + cameraNavcam + ", cameraPancam=" + cameraPancam + ", cameraMinites=" + cameraMinites
+	        + ", rememberPreferences=" + rememberPreferences + "]";
+	  }
 	
 }
